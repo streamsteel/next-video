@@ -1,16 +1,24 @@
 "use client";
 // components/ClientSideVideoManager.tsx
-import React, { useState } from 'react';
-import VideoPlayer from './VideoPlayer';
-import VideoSelector from './VideoSelector';
+import React, { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+const DanamicVideoPlayer = dynamic(() => import('./VideoPlayer'), { ssr: false });
+const DanamicVideoSelector = dynamic(() => import('./VideoSelector'), { ssr: false });
 
 const ClientSideVideoManager: React.FC = () => {
   const [videoUrl, setVideoUrl] = useState<string>('');
 
+  useEffect(() => {
+    const cachedVideo = localStorage.getItem('cachedVideo');
+    if (cachedVideo) {
+      setVideoUrl(cachedVideo);
+    }
+  }, []);
+
   return (
     <div className='w-full max-w-4xl'>
-      <VideoPlayer url={videoUrl} />
-      <VideoSelector onVideoSelect={setVideoUrl} />
+      <DanamicVideoPlayer url={videoUrl} />
+      <DanamicVideoSelector onVideoSelect={setVideoUrl} />
     </div>
   );
 };

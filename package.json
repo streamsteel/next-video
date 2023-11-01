@@ -13,7 +13,11 @@
     "@heroicons/react": "^2.0.18",
     "headlessui": "^0.0.0",
     "heroicons": "^2.0.18",
-    "next": "^14.0.1",
+    "koa": "^2.14.2",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^12.0.1",
+    "koa-static": "^5.0.0",
+    "next": "^14.0.2-canary.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "video.js": "^8.6.1"
