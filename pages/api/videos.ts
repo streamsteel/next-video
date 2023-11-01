@@ -22,12 +22,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
     folders.forEach(folder => {
       const folderPath = path.join(videosDir, folder);
       const filesInFolder = fs.readdirSync(folderPath);
-      console.log(filesInFolder);
-      console.log(folderPath);
 
       filesInFolder.forEach(file => {
-        if (file.endsWith('.m3u8')) {
-          m3u8Files.push(`/Videos/${folder}/${file}`);
+        if (file.endsWith('.m3u8') || file.endsWith('.mp4')) {
+          m3u8Files.push(`${videosDir}/${folder}/${file}`);
         }
       });
     });

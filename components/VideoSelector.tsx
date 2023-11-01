@@ -1,22 +1,18 @@
 // components/VideoSelector.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-const VideoSelector: React.FC<{ onVideoSelect: (url: string) => void }> = ({ onVideoSelect }) => {
+const VideoSelector: React.FC<{ onVideoSelect: (url: string) => void }> = ({
+  onVideoSelect,
+}) => {
   const [videoList, setVideoList] = useState<string[]>([]);
-  const [selectedVideo, setSelectedVideo] = useState<string>('');
+  const [selectedVideo, setSelectedVideo] = useState<string>("");
 
   useEffect(() => {
-    const cachedVideos = localStorage.getItem('cachedVideos');
-    if (cachedVideos) {
-      setVideoList(JSON.parse(cachedVideos));
-    } else {
-      fetch('/api/videos')
-        .then((res) => res.json())
-        .then((data) => {
-          localStorage.setItem('cachedVideos', JSON.stringify(data.m3u8Files));
-          setVideoList(data.m3u8Files);
-        });
-    }
+    fetch("/api/videos")
+      .then((res) => res.json())
+      .then((data) => {
+        setVideoList(data.m3u8Files);
+      });
   }, []);
 
   const handlePlayClick = () => {
